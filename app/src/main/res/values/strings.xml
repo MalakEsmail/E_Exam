@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">E_Exam</string>
+    <string name="student">Student</string>
+    <string name="professor">Professor</string>
+    <string name="admin">Admin</string>
+    <string name="enter_your_password">Enter Your password</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="signup_and_login">SignUp and Login</string>
+    <string name="login">Login</string>
+    <string name="have_you_an_account_sign_up_here">Have You An Account ? Sign Up Here</string>
+    <string name="add_and_edit_from_here">add and edit from here</string>
+    <string name="opne">Open Navigation</string>
+    <string name="close">Close Navigation</string>
+    <string name="Enter_Your_Name">Enter Your Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="enter_subject_name">Enter Subject Name</string>
 </resources>

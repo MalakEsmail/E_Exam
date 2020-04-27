@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Spinner
+        android:id="@+id/chapters_spinner_id"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="30dp"
+
+        />
+    <Spinner
+        android:id="@+id/category_spinner_id"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="30dp"
+
+        />
+
+    <Button
+        android:id="@+id/set_question_Button_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="Set MCQ Questions"
+        />
+    <Button
+        android:id="@+id/set_True_false__question_Button_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="Set T&amp;F Questions"
+        />
+    <Button
+        android:id="@+id/set_open__question_Button_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="Set Open Questions"
+        />
+
+
+
+</LinearLayout>

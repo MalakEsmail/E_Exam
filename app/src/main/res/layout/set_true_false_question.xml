@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:gravity="center"
+    android:padding="30dp"
+    android:layout_margin="20dp"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/true_false_questionEditText_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Question" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="option 1"
+        android:layout_margin="20dp"
+        android:id="@+id/true_false_option1_EditText_id"/>
+    <EditText
+        android:id="@+id/true_false_option2_EditText_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+
+        android:hint="option 2" />
+    <Spinner
+        android:id="@+id/true_false_spinner_correct_answer"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp" />
+    <Button
+        android:id="@+id/true_false_button_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+
+        android:text="Add" />
+
+</LinearLayout>

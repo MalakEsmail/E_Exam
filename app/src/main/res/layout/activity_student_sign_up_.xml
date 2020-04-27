@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".Student.student_sign_up_Activity">
+    <EditText
+        android:id="@+id/studentUserNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/Enter_Your_Name"
+        android:layout_margin="30dp"
+        />
+    <EditText
+        android:id="@+id/studentEmailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_your_email"
+        android:layout_margin="30dp"
+        />
+
+    <EditText
+        android:id="@+id/studentPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_your_password"
+        android:layout_margin="30dp"
+
+        />
+    <EditText
+        android:id="@+id/studentConfirmPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/confirm_password"
+        android:layout_margin="30dp"
+        />
+
+    <Spinner
+        android:id="@+id/departments_spinner"
+        android:layout_width="250dp"
+        android:layout_height="35dp"
+        />
+    <Spinner
+        android:id="@+id/levels_spinner"
+        android:layout_width="250dp"
+        android:layout_height="35dp"
+        />
+
+    <Button
+        android:id="@+id/studentSignUpButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="@string/signup_and_login"
+        android:onClick="gotoStudentSubjectsList"
+
+        />
+
+</LinearLayout>
+

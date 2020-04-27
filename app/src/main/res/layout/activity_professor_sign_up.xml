@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".Professor.ProfessorSignUpActivity">
+    <EditText
+        android:id="@+id/professorUserNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/Enter_Your_Name"
+        android:layout_margin="30dp"
+        />
+
+    <EditText
+        android:id="@+id/ProfessorPhoneEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your Phone"
+        android:layout_margin="30dp"
+        />
+
+    <EditText
+        android:id="@+id/professorPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_your_password"
+        android:layout_margin="30dp"
+
+        />
+    <EditText
+        android:id="@+id/ProfessorConfirmPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/confirm_password"
+        android:layout_margin="30dp"
+
+        />
+
+
+    <Button
+        android:id="@+id/professorSignUpButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="@string/signup_and_login"
+
+        />
+
+</LinearLayout>
+

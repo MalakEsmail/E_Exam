@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="150dp"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Professor.professorLoginActivity">
+
+    <EditText
+        android:id="@+id/ProfessorLoginEmailEditTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_your_email"
+        android:layout_margin="30dp"
+        />
+
+    <EditText
+        android:id="@+id/ProfessorLoginPasswordEditTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_your_password"
+        android:layout_margin="30dp"
+
+        />
+    <Button
+        android:id="@+id/ProfessorSignInButtonId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="@string/login"
+        android:onClick="openProfessorPage"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Or SignUp From Here"
+        android:onClick="GotoProfessorSignUpPage"
+        />
+
+</LinearLayout>
+

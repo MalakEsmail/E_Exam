@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:checkableBehavior="single">
+    <item android:title="Levels">
+        <menu>
+          <item
+            android:id="@+id/AddlevelsId"
+            android:title="Add Levels"
+             android:icon="@drawable/levels"
+        />
+          <item
+             android:id="@+id/showOrEditlevelsId"
+            android:title="Show Or Edit Levels"
+            android:icon="@drawable/levels"
+        />
+        </menu>
+    </item>
+    <item android:title="Departments">
+        <menu>
+            <item
+                android:id="@+id/AddDepartmentsId"
+                android:title="Add Departments"
+                android:icon="@drawable/deptss"
+             />
+            <item
+                android:id="@+id/showOrEditDepartmentsId"
+                android:title="Show Or Edit  Departments"
+                android:icon="@drawable/deptss"
+                />
+        </menu>
+    </item>
+    <item android:title="Subjects">
+        <menu>
+        <item
+            android:id="@+id/addSubjectsId"
+            android:title="Add Subjects"
+            android:icon="@drawable/subjects"
+        />
+        <item
+            android:id="@+id/showOrEditSubjectsId"
+            android:title="Show Or Edit Subjects"
+            android:icon="@drawable/subjects"
+            />
+        </menu>
+    </item>
+    <item android:title="Professors">
+        <menu>
+        <item
+             android:id="@+id/ProfessorsRequestsId"
+             android:title="Requests"
+             android:icon="@drawable/profs"
+
+        />
+        <item
+            android:id="@+id/ShowProfessorsListId"
+            android:title="Show List"
+            android:icon="@drawable/profs"
+
+            />
+            <item
+                android:id="@+id/AddProfessorsSubjectsId"
+                android:title="Add Subjects"
+                android:icon="@drawable/profs"
+
+                />
+    </menu>
+    </item>
+    <item
+        android:id="@+id/LogoutId"
+        android:title="LogOut"
+        android:icon="@drawable/logout"
+        />
+
+</group>
+</menu>

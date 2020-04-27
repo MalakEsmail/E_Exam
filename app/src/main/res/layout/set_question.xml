@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_margin="30dp"
+    android:padding="30dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/question_editText_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Question"
+
+        />
+    <EditText
+        android:id="@+id/option1_editText_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Option 1"
+        android:paddingTop="30dp"
+        />
+    <EditText
+        android:id="@+id/option2_editText_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Option 2"
+        android:paddingTop="30dp"
+
+        />
+    <EditText
+        android:id="@+id/option3_editText_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Option 3"
+        android:paddingTop="30dp"
+
+        />
+    <EditText
+        android:id="@+id/option4_editText_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Option 4"
+        android:paddingTop="30dp"
+
+        />
+
+    <Spinner
+        android:id="@+id/correct_answer__spinner_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:paddingTop="30dp"
+        />
+
+    <Button
+        android:id="@+id/add_question_Button_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add"
+
+
+        />
+
+</LinearLayout>

@@ -1,41 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="150dp"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <Button
-        android:id="@+id/studentButton"
+    tools:context=".Admin.AdminLoginActivity">
+    <EditText
+        android:id="@+id/adminEmailEditTextId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/student"
-        android:padding="25dp"
+        android:hint="@string/enter_your_email"
         android:layout_margin="30dp"
-        android:onClick="goTostudentPage"
-
         />
-    <Button
-        android:id="@+id/professorButton"
+    <EditText
+        android:id="@+id/adminPasswordEditTextId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/professor"
-        android:padding="25dp"
+        android:hint="@string/enter_your_password"
         android:layout_margin="30dp"
-        android:onClick="gotoProfessorsPage"
         />
     <Button
-        android:id="@+id/adminButton"
+        android:id="@+id/adminLoginButtonId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/admin"
         android:layout_margin="30dp"
-        android:padding="25dp"
-        android:onClick="goToAdminPage"
+        android:text="@string/login"
         />
-
-
 </LinearLayout>
+
