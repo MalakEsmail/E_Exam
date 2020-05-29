@@ -31,9 +31,6 @@ android:padding="5dp"
             android:textSize="20sp"
 
             />
-
-
-
         <Button
             android:id="@+id/buttonDeleteLevelId"
             android:layout_width="0dp"

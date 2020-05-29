@@ -17,6 +17,8 @@ import com.example.e_exam.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 public class AddDepartment extends Fragment {
     Button buttonAddDept;
     EditText enterDepartName;
@@ -31,7 +33,6 @@ public class AddDepartment extends Fragment {
         enterDepartName=(EditText) view.findViewById(R.id.editTextAddDepartmentId);
         ref= FirebaseDatabase.getInstance().getReference();
 
-
         buttonAddDept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,8 +41,12 @@ public class AddDepartment extends Fragment {
                     Toast.makeText(getContext(), "Please enter Department Name ", Toast.LENGTH_LONG).show();
                 }
                 else {
-                    ref.child("Departments").push().setValue(department);
+                    HashMap<String , Object > hashMap = new HashMap<>();
+                    hashMap.put("departmentName" , department);
+                    ref.child("Departments").push().updateChildren(hashMap);
+                    ref.child("departmentName").push().setValue(department);
                     enterDepartName.setText("");
+
                     Toast.makeText(getContext(),"department added",Toast.LENGTH_SHORT).show();
                 }
             }

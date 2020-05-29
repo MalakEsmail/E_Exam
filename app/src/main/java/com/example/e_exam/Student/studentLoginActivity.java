@@ -17,12 +17,12 @@ public class studentLoginActivity extends AppCompatActivity {
     }
 
     public void openStudentPage(View view) {
-        Intent i=new Intent(this, studentSubjectsActivity.class);
+        Intent i = new Intent(this, studentSubjectsActivity.class);
         startActivity(i);
     }
 
     public void GotoStudentSignUpPage(View view) {
-        Intent i=new Intent(this, student_sign_up_Activity.class);
+        Intent i = new Intent(this, student_sign_up_Activity.class);
         startActivity(i);
     }
 }

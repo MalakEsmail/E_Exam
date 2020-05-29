@@ -10,10 +10,10 @@
     tools:context=".Professor.professorLoginActivity">
 
     <EditText
-        android:id="@+id/ProfessorLoginEmailEditTextId"
+        android:id="@+id/ProfessorLoginPhoneEditTextId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_your_email"
+        android:hint="Enter Your Phone"
         android:layout_margin="30dp"
         />
 
@@ -31,7 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:text="@string/login"
-        android:onClick="openProfessorPage"
         />
     <TextView
         android:layout_width="wrap_content"

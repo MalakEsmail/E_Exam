@@ -1,13 +1,12 @@
 package com.example.e_exam.Professor;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,47 +14,134 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.e_exam.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SetQuestionFragment extends Fragment {
+    EditText categoryEditText,questionEditText,option1Edittext
+            ,option2Edittext,option3Edittext,option4EditText,correctAnswerEditText;
+    String category,question,option1,option2,option3,option4,correctAnswer;
+    String subject,chapter;
+    DatabaseReference reference;
+    public SetQuestionFragment(String subject, String chapter) {
+        this.subject = subject;
+        this.chapter = chapter;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.set_question,container,false);
-        //Question EditText
-        EditText question=(EditText)view.findViewById(R.id.question_editText_id);
 
-        //option 1 EditText
-        EditText option1=(EditText)view.findViewById(R.id.option1_editText_id);
-        //option 2 EditText
-        EditText option2=(EditText)view.findViewById(R.id.option2_editText_id);
-        //option 3 EditText
-        EditText option3=(EditText)view.findViewById(R.id.option3_editText_id);
-        //option 4 EditText
-        EditText option4=(EditText)view.findViewById(R.id.option4_editText_id);
+         categoryEditText=(EditText)view.findViewById(R.id.set_Category_id);
+         questionEditText=(EditText)view.findViewById(R.id.question_editText_id);
+         option1Edittext=(EditText)view.findViewById(R.id.option1_editText_id);
+         option2Edittext=(EditText)view.findViewById(R.id.option2_editText_id);
+         option3Edittext=(EditText)view.findViewById(R.id.option3_editText_id);
+         option4EditText=(EditText)view.findViewById(R.id.option4_editText_id);
+         correctAnswerEditText=(EditText)view.findViewById(R.id.correctAnswer_editText_id);
 
-
-        //correct Answer spinner
-        Spinner correctAnswer=(Spinner) view.findViewById(R.id.correct_answer__spinner_id);
-        ArrayList<String> correctAnswerOption=new ArrayList<String>();
-        correctAnswerOption.add("correct Answer");
-        correctAnswerOption.add("option1");
-        correctAnswerOption.add("option2");
-        correctAnswerOption.add("option3");
-        ArrayAdapter optionAdapter=new ArrayAdapter(getContext(),R.layout.support_simple_spinner_dropdown_item,correctAnswerOption);
-        correctAnswer.setAdapter(optionAdapter);
         // button to add Question
         Button addQuestion=(Button)view.findViewById(R.id.add_question_Button_id);
         addQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Question added", Toast.LENGTH_SHORT).show();
+                 category=categoryEditText.getText().toString();
+                 question=questionEditText.getText().toString();
+                 option1=option1Edittext.getText().toString();
+                 option2=option2Edittext.getText().toString();
+                 option3=option3Edittext.getText().toString();
+                 option4=option4EditText.getText().toString();
+                correctAnswer=correctAnswerEditText.getText().toString();
+
+                validation();
+
+            //    Toast.makeText(getContext(), "Question added", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
         return view;
+    }
+
+    private void validation() {
+        if(TextUtils.isEmpty(category) )
+        {
+            Toast.makeText(getContext(), "Please..Enter Category", Toast.LENGTH_SHORT).show();
+        }
+        else if(!((TextUtils.equals(category,"A")) || (TextUtils.equals(category,"B"))|| (TextUtils.equals(category,"C"))))
+        {
+            Toast.makeText(getContext(), "Please..Enter Category From only A or B or C At Capital Letters", Toast.LENGTH_LONG).show();
+        }
+        else if(TextUtils.isEmpty(question) )
+        {
+            Toast.makeText(getContext(), "Please..Enter Question", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(option1) )
+        {
+            Toast.makeText(getContext(), "Please..Enter First Option", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(option2) )
+        {
+            Toast.makeText(getContext(), "Please..Enter Second Option", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(option3) )
+        {
+            Toast.makeText(getContext(), "Please..Enter Third Option", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(option4) )
+        {
+            Toast.makeText(getContext(), "Please..Enter Last Option", Toast.LENGTH_SHORT).show();
+        }
+        else if(TextUtils.isEmpty(correctAnswer) )
+        {
+            Toast.makeText(getContext(), "Please..Specify Correct Answer", Toast.LENGTH_SHORT).show();
+        }
+        else if(
+                !(TextUtils.equals(correctAnswer,option1) ||
+                TextUtils.equals(correctAnswer,option2) ||
+                TextUtils.equals(correctAnswer,option3) || TextUtils.equals(correctAnswer,option4))
+        )
+        {
+            Toast.makeText(getContext(), "this Answer is not from options you Entered ", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            addToDB();
+        }
+
+    }
+
+    private void addToDB() {
+        reference= FirebaseDatabase.getInstance().getReference()
+                .child("chapters").child(subject).child(chapter).child("mcq").child(category);
+        final HashMap hashMap=new HashMap();
+        hashMap.put("question",question);
+        hashMap.put("option1",option1);
+        hashMap.put("option2",option2);
+        hashMap.put("option3",option3);
+        hashMap.put("option4",option4);
+        hashMap.put("correctAnswer",correctAnswer);
+
+                    reference.child(question).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
+                        @Override
+                        public void onComplete(@NonNull Task task) {
+                            emptyEditText();
+
+                            Toast.makeText(getContext(), "Question Added Successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+    }
+    private void emptyEditText() {
+        categoryEditText.setText("");
+        questionEditText.setText("");
+        option1Edittext.setText("");
+        option2Edittext.setText("");
+        option3Edittext.setText("");
+        option4EditText.setText("");
+        correctAnswerEditText.setText("");
+
     }
 }

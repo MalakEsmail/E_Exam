@@ -1,35 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item android:title="Chapters">
-            <menu>
         <item
             android:id="@+id/addChaptersId"
-            android:title="ADD"
+            android:title="Add Chapters"
             android:icon="@drawable/levels"
             />
         <item
             android:id="@+id/showOrEditChaptersId"
-            android:title="Show Or Edit"
+            android:title="Add Questions to chapters"
             android:icon="@drawable/levels"
             />
-            </menu>
-        </item>
-
-        <item android:title="Questions">
-            <menu>
-                <item
-                    android:id="@+id/addCategoryId"
-                    android:title="ADD Category"
-                    android:icon="@drawable/levels"
-                    />
-                <item
-                    android:id="@+id/addQuestionsId"
-                    android:title="Add Questions"
-                    android:icon="@drawable/levels"
-                    />
-            </menu>
-        </item>
 
         <item
             android:id="@+id/ExamsStructureId"

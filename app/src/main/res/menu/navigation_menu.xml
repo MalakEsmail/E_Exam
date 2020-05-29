@@ -10,7 +10,7 @@
         />
           <item
              android:id="@+id/showOrEditlevelsId"
-            android:title="Show Or Edit Levels"
+            android:title="Levels List"
             android:icon="@drawable/levels"
         />
         </menu>
@@ -24,7 +24,7 @@
              />
             <item
                 android:id="@+id/showOrEditDepartmentsId"
-                android:title="Show Or Edit  Departments"
+                android:title="Departments List"
                 android:icon="@drawable/deptss"
                 />
         </menu>
@@ -38,7 +38,7 @@
         />
         <item
             android:id="@+id/showOrEditSubjectsId"
-            android:title="Show Or Edit Subjects"
+            android:title="Subjects List"
             android:icon="@drawable/subjects"
             />
         </menu>
@@ -53,16 +53,11 @@
         />
         <item
             android:id="@+id/ShowProfessorsListId"
-            android:title="Show List"
+            android:title="Add Subjects"
             android:icon="@drawable/profs"
 
             />
-            <item
-                android:id="@+id/AddProfessorsSubjectsId"
-                android:title="Add Subjects"
-                android:icon="@drawable/profs"
 
-                />
     </menu>
     </item>
     <item

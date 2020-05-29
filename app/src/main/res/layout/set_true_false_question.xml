@@ -7,6 +7,14 @@
     android:layout_margin="20dp"
     android:layout_height="match_parent">
     <EditText
+        android:id="@+id/set_Category_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Category A or B or C"
+
+        />
+    <EditText
         android:id="@+id/true_false_questionEditText_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,22 +23,10 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="option 1"
+        android:hint="correct Answer"
         android:layout_margin="20dp"
-        android:id="@+id/true_false_option1_EditText_id"/>
-    <EditText
-        android:id="@+id/true_false_option2_EditText_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:id="@+id/true_false_correctAnswer_EditText_id"/>
 
-        android:hint="option 2" />
-    <Spinner
-        android:id="@+id/true_false_spinner_correct_answer"
-        android:layout_width="match_parent"
-
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp" />
     <Button
         android:id="@+id/true_false_button_add"
         android:layout_width="match_parent"

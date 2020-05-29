@@ -43,7 +43,8 @@ public class AddLevel extends Fragment {
                 else {
                     HashMap<String , Object > hashMap = new HashMap<>();
                     hashMap.put("levelName" , level);
-                    ref.child("Levels").child("levelName").push().setValue(hashMap);
+                    ref.child("Levels").push().updateChildren(hashMap);
+                    ref.child("levelName").push().setValue(level);
                     enterLevelEditText.setText("");
                     Toast.makeText(getContext(), "Level Added", Toast.LENGTH_LONG).show();
                 }

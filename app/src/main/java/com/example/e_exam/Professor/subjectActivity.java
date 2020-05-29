@@ -21,13 +21,14 @@ public class subjectActivity extends  AppCompatActivity implements NavigationVie
         NavigationView subject_navigationView;
     FragmentTransaction transaction;
     FragmentManager manager;
+    String subject;
 
 
 @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject);
-
+     subject=getIntent().getExtras().getString("sub");
         manager=getSupportFragmentManager();
         transaction =manager.beginTransaction();
 
@@ -47,28 +48,18 @@ public class subjectActivity extends  AppCompatActivity implements NavigationVie
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.addChaptersId:
-                AddChaptersFragment addChaptFragment=new AddChaptersFragment();
+                AddChaptersFragment addChaptFragment=new AddChaptersFragment(subject);
                 transaction.replace(R.id.frame_Subject_container,addChaptFragment);
                 transaction.commit();
                 break;
             case R.id.showOrEditChaptersId:
-                ChaptersFragment showEditchpFragment=new ChaptersFragment();
+                ChaptersFragment showEditchpFragment=new ChaptersFragment(subject);
                 transaction.replace(R.id.frame_Subject_container,showEditchpFragment);
-                transaction.commit();
-                break;
-            case R.id.addCategoryId:
-                CategoryFragment categoryFragment=new CategoryFragment();
-                transaction.replace(R.id.frame_Subject_container,categoryFragment);
-                transaction.commit();
-                break;
-            case R.id.addQuestionsId:
-                AddQuestionFragment questionFragment=new AddQuestionFragment();
-                transaction.replace(R.id.frame_Subject_container,questionFragment);
                 transaction.commit();
                 break;
 
             case R.id.ExamsStructureId:
-                ExamStructureFragment examStructureFragment=new ExamStructureFragment();
+                ExamStructureFragment examStructureFragment=new ExamStructureFragment(subject);
                 transaction.replace(R.id.frame_Subject_container,examStructureFragment);
                 transaction.commit();
                 break;

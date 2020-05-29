@@ -8,6 +8,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <EditText
+        android:id="@+id/set_Category_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Category A or B or C"
+
+        />
+    <EditText
         android:id="@+id/question_editText_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,20 +52,21 @@
         android:paddingTop="30dp"
 
         />
-
-    <Spinner
-        android:id="@+id/correct_answer__spinner_id"
+    <EditText
+        android:id="@+id/correctAnswer_editText_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:hint="Correct Answer"
         android:paddingTop="30dp"
+
         />
+
 
     <Button
         android:id="@+id/add_question_Button_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add"
+        android:text="Add Question"
 
 
         />

@@ -7,14 +7,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.e_exam.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class ProfessorSignUpActivity extends AppCompatActivity {
     EditText nameEditText,phoneEditText,passwordEditText,confirmPasswordEditText;
     Button buttonSignUp;
-    String name,email,phone,password,confirmPassword;
+    String name,phone,password,confirmPassword;
+    DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +48,6 @@ public class ProfessorSignUpActivity extends AppCompatActivity {
                 password=passwordEditText.getText().toString();
                 confirmPassword=confirmPasswordEditText.getText().toString();
                 validation();
-
             }
         });
 
@@ -64,49 +74,51 @@ public class ProfessorSignUpActivity extends AppCompatActivity {
             Toast.makeText(ProfessorSignUpActivity.this, " password not matches", Toast.LENGTH_SHORT).show();
 
         }else{
-          //  settoFireBase(name,email,phone,password);
+          setToFireBase();
         }
     }
 
-   /* private void settoFireBase(final String name, final String email, final String phone, final String password) {
-        final DatabaseReference databaseReference;
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("Users");
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+    private void setToFireBase() {
+        ref= FirebaseDatabase.getInstance().getReference().child("Professors").child("Requests");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(!(dataSnapshot.child("professors").child(phone).exists())){
+                if(dataSnapshot.child(phone).exists()){
+                    Toast.makeText(ProfessorSignUpActivity.this, "This professor is  already exist ", Toast.LENGTH_LONG).show();
+                    nameEditText.setText("");
+                    phoneEditText.setText("");
+                    passwordEditText.setText("");
+                    confirmPasswordEditText.setText("");
+
+
+                }
+                else{
                     HashMap<String, Object> professorData = new HashMap<>();
                     professorData.put("name",name);
                     professorData.put("password",password);
                     professorData.put("phone",phone);
-
-                    databaseReference.child("professors").child(phone).updateChildren(professorData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    ref.child(phone).updateChildren(professorData).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(ProfessorSignUpActivity.this, "Congratulation "+name+"  , your account has been created.", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(ProfessorSignUpActivity.this, ProfessorActivity.class);
-                                startActivity(intent);
-                            }else{
-                                Toast.makeText(ProfessorSignUpActivity.this, "someThing Wrong", Toast.LENGTH_LONG).show();
+                                Toast.makeText(ProfessorSignUpActivity.this, "Congratulation professor "+name+"  , your account has been created.", Toast.LENGTH_LONG).show();
+                                   nameEditText.setText("");
+                                phoneEditText.setText("");
+                                passwordEditText.setText("");
+                                confirmPasswordEditText.setText("");
+
+
                             }
                         }
                     });
-                }
-                else{
-                    Toast.makeText(ProfessorSignUpActivity.this, "This " + phone + " already exist ", Toast.LENGTH_LONG).show();
-                    Toast.makeText(ProfessorSignUpActivity.this, "Please try again using another email.", Toast.LENGTH_LONG).show();
-
-                    Intent intent = new Intent(ProfessorSignUpActivity.this, MainActivity.class);
-                    startActivity(intent);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
-
-    }*/
+    }
 
 }

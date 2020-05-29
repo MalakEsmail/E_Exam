@@ -68,9 +68,9 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                 transaction.commit();
                 break;
             case R.id.showOrEditDepartmentsId:
-                show_edit_department_fragement editorShowDepartmentFragment=new show_edit_department_fragement();
+                DepartmentFragment departmentFragment=new DepartmentFragment();
 
-                transaction.replace(R.id.frame_container,editorShowDepartmentFragment);
+                transaction.replace(R.id.frame_container,departmentFragment);
                 transaction.commit();
                 break;
             case R.id.addSubjectsId:
@@ -93,16 +93,11 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
                 transaction.commit();
                 break;
             case R.id.ShowProfessorsListId:
-                ProfessorListFragment professorsFragement=new ProfessorListFragment();
+                ProfessorsListFragment professorsFragement=new ProfessorsListFragment();
                 transaction.replace(R.id.frame_container,professorsFragement);
                 transaction.commit();
                 break;
-            case R.id.AddProfessorsSubjectsId:
-                AddSubjectsToProfessorFragment addprofSubjects=new AddSubjectsToProfessorFragment();
-                transaction.replace(R.id.frame_container,addprofSubjects);
-                transaction.commit();
 
-                break;
             case R.id.LogoutId:
                 finish();
                 break;

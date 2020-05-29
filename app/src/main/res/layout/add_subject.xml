@@ -21,14 +21,14 @@
 
         />
     <EditText
-        android:id="@+id/Add_Subject_EditText_id"
+        android:id="@+id/add_Subject_EditText_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_subject_name"
         android:layout_margin="30dp"
         />
     <Button
-        android:id="@+id/Add_subject_Button_id"
+        android:id="@+id/add_subject_Button_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"

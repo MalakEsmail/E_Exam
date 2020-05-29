@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -14,9 +15,10 @@
         android:layout_height="wrap_content"
         android:text="@string/student"
         android:padding="25dp"
+        android:textColor="@color/white"
+        android:background="#D5A257"
         android:layout_margin="30dp"
         android:onClick="goTostudentPage"
-
         />
     <Button
         android:id="@+id/professorButton"
@@ -24,6 +26,8 @@
         android:layout_height="wrap_content"
         android:text="@string/professor"
         android:padding="25dp"
+        android:textColor="@color/white"
+        android:background="#99A58B"
         android:layout_margin="30dp"
         android:onClick="gotoProfessorsPage"
         />
@@ -34,6 +38,9 @@
         android:text="@string/admin"
         android:layout_margin="30dp"
         android:padding="25dp"
+        android:textColor="@color/white"
+
+        android:background="#1B7A7A"
         android:onClick="goToAdminPage"
         />
 

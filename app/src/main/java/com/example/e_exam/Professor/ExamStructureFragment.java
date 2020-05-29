@@ -1,6 +1,7 @@
 package com.example.e_exam.Professor;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,75 +16,162 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.e_exam.R;
+import com.example.e_exam.model.Question;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExamStructureFragment extends Fragment {
+    DatabaseReference reference;
+    Spinner chapterSpinner;
+    Spinner questionTypeSpinner;
+    Spinner categorySpinner;
+    ArrayList<String> chapterArray;
+    ArrayList<String> categoryList;
+    ArrayList<String> questionTypesList;
+    ArrayAdapter<String> chapterAdapter;
+    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> questionAdapter;
+    String subject, time, questionNum, chapter, type, category;
+    ValueEventListener listener;
+    Question question;
+    ArrayList<Question> questionsArr;
+    int i = 0;
+
+
+    public ExamStructureFragment(String subject) {
+        this.subject = subject;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.exam_structure,container,false);
-        // Maximum Questions number allowed for each subject Exam
-        EditText MaxQuestionNum=(EditText) view.findViewById(R.id.ExamQuestionNumbersEditTextId);
-       // MaxQuestionNum.setInputType();
-        // Time allowed for each subject Exam
-        EditText ExamAllowedTime=(EditText) view.findViewById(R.id.ExamAllowedTimeEditTextId);
-       // ExamAllowedTime.setInputType();
+        View view = inflater.inflate(R.layout.exam_structure, container, false);
 
-        //choose chapter spinner
-        Spinner chooseChpSpinner=(Spinner) view.findViewById(R.id.spinnerChooseChapterId);
-        ArrayList<String> chpArrayList=new ArrayList<String>();
-        chpArrayList.add("choose chapter");
-        chpArrayList.add("chapter one");
-        chpArrayList.add("chapter two");
-        chpArrayList.add("chapter three");
+        reference = FirebaseDatabase.getInstance().getReference();
 
-        ArrayAdapter chpArrayAdapter=new ArrayAdapter(getContext(),
-                R.layout.support_simple_spinner_dropdown_item,chpArrayList);
-        chooseChpSpinner.setAdapter(chpArrayAdapter);
+        final EditText allowedTime = (EditText) view.findViewById(R.id.ExamAllowedTimeEditTextId);
+        final EditText numOfQuestions = (EditText) view.findViewById(R.id.allowedQuestionEditTextId);
 
-        //choose question type spinner
-        Spinner chooseQuestionTypeSpinner=(Spinner) view.findViewById(R.id.spinnerChooseQuestionTypeId);
-        ArrayList<String> questionTypeArrayList=new ArrayList<String>();
-        questionTypeArrayList.add("choose question");
-        questionTypeArrayList.add("Question one");
-        questionTypeArrayList.add("Question two");
-        questionTypeArrayList.add("Question three");
+        //chapter spinner
+        chapterSpinner = (Spinner) view.findViewById(R.id.spinnerChooseChapterId);
+        addChapterSpinner();
 
-        ArrayAdapter questionArrayAdapter=new ArrayAdapter(getContext(),
-                R.layout.support_simple_spinner_dropdown_item,questionTypeArrayList);
-        chooseQuestionTypeSpinner.setAdapter(questionArrayAdapter);
+        //question type spinner
+        questionTypeSpinner = (Spinner) view.findViewById(R.id.spinnerChooseQuestionTypeId);
+        addQuestionTypeSpinner();
 
+        //category spinner
+        categorySpinner = (Spinner) view.findViewById(R.id.spinnerChooseCategoryId);
+        addCategorySpinner();
 
-        //choose category spinner
-        Spinner chooseCategorySpinner=(Spinner) view.findViewById(R.id.spinnerChooseCategoryId);
-        ArrayList<String> categoryArrayList=new ArrayList<String>();
-        categoryArrayList.add("choose category");
-        categoryArrayList.add("A");
-        categoryArrayList.add("B");
-        categoryArrayList.add("C");
-
-        ArrayAdapter categoryArrayAdapter=new ArrayAdapter(getContext(),
-                R.layout.support_simple_spinner_dropdown_item,categoryArrayList);
-        chooseCategorySpinner.setAdapter(categoryArrayAdapter);
-
-        //needed number of question
-        EditText neededQuestionNum=(EditText) view.findViewById(R.id.allowedQuestionEditTextId);
-
-        //Button to add selected specefication to exam
-        Button addButton=(Button) view.findViewById(R.id.buttonAddExamQuestionId);
+        Button addButton = (Button) view.findViewById(R.id.buttonAddExamQuestionId);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Added to Exam", Toast.LENGTH_SHORT).show();
+                time = allowedTime.getText().toString();
+                questionNum = numOfQuestions.getText().toString();
+                validation();
+
             }
         });
 
-
-
-
-
-
         return view;
+    }
+
+    private void validation() {
+        if (TextUtils.isEmpty(time)) {
+            Toast.makeText(getContext(), "please Enter Exam Time", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(questionNum)) {
+            Toast.makeText(getContext(), "please detect number needed", Toast.LENGTH_SHORT).show();
+        } else {
+            chapter = chapterSpinner.getSelectedItem().toString();
+            type = questionTypeSpinner.getSelectedItem().toString();
+            category = categorySpinner.getSelectedItem().toString();
+            getQuestionsFromDb();
+            //  Toast.makeText(getContext(), "correct Answer"+questionsArr.get(0), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void getQuestionsFromDb() {
+        final List<Question> list = new ArrayList<>();
+        final List<String> correct = new ArrayList<>();
+        //  questionsArr=new ArrayList<>();
+        reference.child("chapters").child(subject).child(chapter).child(type).child(category)
+                /*.child("what's our major character ?")*/.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            /*  // question=dataSnapshot.getValue(Question.class);
+                 Iterator<DataSnapshot> iterator=dataSnapshot.getChildren().iterator();
+                int length = (int) dataSnapshot.getChildrenCount();
+                String[] sampleString = new String[length];
+                while(i < length) {
+                    sampleString[i] = iterator.next().getValue().toString();
+                  //  Toast.makeText(getContext(), ""+sampleString[i], Toast.LENGTH_SHORT).show();
+                    i++;
+              }*/
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    Question q = item.getValue(Question.class);
+                    list.add(q);
+                    correct.add(q.getCorrectAnswer());
+                }
+                Toast.makeText(getContext(), "" + correct, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void addCategorySpinner() {
+        categoryList = new ArrayList();
+        categoryList.add("A");
+        categoryList.add("B");
+        categoryList.add("C");
+
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, categoryList);
+        categorySpinner.setAdapter(adapter);
+
+    }
+
+    private void addQuestionTypeSpinner() {
+        questionTypesList = new ArrayList();
+        questionTypesList.add("mcq");
+        questionTypesList.add("TF");
+        questionAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, questionTypesList);
+        questionTypeSpinner.setAdapter(questionAdapter);
+    }
+
+    private void addChapterSpinner() {
+        chapterArray = new ArrayList<>();
+        chapterAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, chapterArray);
+        retrieveFromDB();
+        chapterSpinner.setAdapter(chapterAdapter);
+
+    }
+
+    private void retrieveFromDB() {
+        listener = reference.child("chaptersList").
+                addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot item : dataSnapshot.getChildren()) {
+                            chapterArray.add(item.getValue().toString());
+                        }
+                        chapterAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
     }
 }

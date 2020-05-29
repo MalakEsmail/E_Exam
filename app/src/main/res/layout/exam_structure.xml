@@ -6,13 +6,7 @@
     android:layout_margin="30dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <EditText
-        android:id="@+id/ExamQuestionNumbersEditTextId"
-        android:hint="Enter Exam Maximum Questions numbers"
-        android:padding="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
+       <EditText
         android:id="@+id/ExamAllowedTimeEditTextId"
         android:padding="20dp"
         android:hint="Enter Exam Allowed Time hh:mm"
@@ -46,9 +40,8 @@
         android:layout_height="wrap_content"/>
     <Button
         android:id="@+id/buttonAddExamQuestionId"
-        android:text="Add"
+        android:text="set"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
 
 </LinearLayout>
