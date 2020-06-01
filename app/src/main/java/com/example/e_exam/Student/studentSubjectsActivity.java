@@ -1,42 +1,99 @@
 package com.example.e_exam.Student;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.e_exam.R;
-
-import java.util.ArrayList;
+import com.example.e_exam.ViewHolders.SubjectsViewHolder;
+import com.example.e_exam.model.Subjects;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class studentSubjectsActivity extends AppCompatActivity {
     RecyclerView studentSubjectsRecyclerView;
     RecyclerView.LayoutManager layoutManager1;
-    student_subject_class_adapter adapterRecyclerLiner1;
-    ArrayList<student_set_get_subjects> studentSubjectList;
+
+    private String userId, departmentName, levelName;
+    private DatabaseReference subRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_subjects);
-        linerStudentSubjectList();
-        studentSubjectsRecyclerView =findViewById(R.id.recycler_view_Student_subject_listView);
+        studentSubjectsRecyclerView = findViewById(R.id.recycler_view_Student_subject_listView);
         studentSubjectsRecyclerView.setHasFixedSize(true);
-        layoutManager1=new LinearLayoutManager(this);
+        layoutManager1 = new LinearLayoutManager(this);
         studentSubjectsRecyclerView.setLayoutManager(layoutManager1);
-        adapterRecyclerLiner1 =new student_subject_class_adapter(this,studentSubjectList);
-        studentSubjectsRecyclerView.setAdapter(adapterRecyclerLiner1);
+        Intent intent = getIntent();
+        userId = intent.getStringExtra("uId");
+        departmentName = intent.getStringExtra("departmentName");
+        levelName = intent.getStringExtra("levelName");
+        subRef = FirebaseDatabase.getInstance().getReference().child("Subjects").child(levelName).child(departmentName);
 
     }
-    //list subject names to be shown for students
 
-    private void linerStudentSubjectList() {
-        studentSubjectList =new ArrayList<student_set_get_subjects>();
-        // Todo Admin who is responsible for adding to each student his subjects depending on his level and department
-        studentSubjectList.add(new student_set_get_subjects("First Subject "));
-        studentSubjectList.add(new student_set_get_subjects("second Subject "));
-        studentSubjectList.add(new student_set_get_subjects("third Subject "));
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseRecyclerOptions<Subjects> options = new FirebaseRecyclerOptions.Builder<Subjects>()
+                .setQuery(subRef, Subjects.class).build();
+        FirebaseRecyclerAdapter<Subjects, SubjectsViewHolder> adapter =
+                new FirebaseRecyclerAdapter<Subjects, SubjectsViewHolder>(options) {
+                    @Override
+                    protected void onBindViewHolder(@NonNull final SubjectsViewHolder holder, int i, @NonNull final Subjects subjects) {
+                        holder.subjectTextView.setText(subjects.getSubjectName());
+                        holder.itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
+                                //Set Alert Dialog
+                                CharSequence option[] = new CharSequence[]{
+                                        "Start",
+                                        "Cancel"
+                                };
+                                AlertDialog.Builder builder = new AlertDialog.Builder(studentSubjectsActivity.this);
+                                builder.setTitle("Are You Ready To Start Exam ?");
+                                builder.setItems(option, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int i) {
+                                        if (i == 0) {
+                                            Intent intent = new Intent(studentSubjectsActivity.this, ExamPaperActivity.class);
+                                            String subject = subjects.getSubjectName().toString();
+                                            intent.putExtra("subject", subject);
+                                            startActivity(intent);
+                                        }
+                                        if (i == 1) {
+                                            finish();
+                                        }
+                                    }
+                                });
+                                builder.show();
+                            }
+                        });
+                    }
+
+                    @NonNull
+                    @Override
+                    public SubjectsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.show_edit_subjects_recyclerview_row, parent, false);
+                        SubjectsViewHolder subjectsViewHolder = new SubjectsViewHolder(view);
+                        return subjectsViewHolder;
+                    }
+                };
+        studentSubjectsRecyclerView.setAdapter(adapter);
+        adapter.startListening();
     }
 }

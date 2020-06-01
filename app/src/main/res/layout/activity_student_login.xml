@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="150dp"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="150dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".Student.studentLoginActivity">
 
     <EditText
         android:id="@+id/studentLoginEmailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_your_email"
         android:layout_margin="30dp"
-        />
+        android:hint="@string/enter_your_email"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/studentLoginPasswordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_your_password"
         android:layout_margin="30dp"
+        android:inputType="textPassword"
+        android:hint="@string/enter_your_password"
 
         />
+
     <Button
         android:id="@+id/studentSignInButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:text="@string/login"
         android:onClick="openStudentPage"
-        />
+        android:text="@string/login" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Or SignUp From Here"
         android:onClick="GotoStudentSignUpPage"
-        />
+        android:text="Or SignUp From Here" />
 
 </LinearLayout>
 

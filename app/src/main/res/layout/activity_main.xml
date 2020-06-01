@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -13,36 +12,34 @@
         android:id="@+id/studentButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/student"
-        android:padding="25dp"
-        android:textColor="@color/white"
-        android:background="#D5A257"
         android:layout_margin="30dp"
+        android:background="@drawable/special_button"
         android:onClick="goTostudentPage"
-        />
+        android:padding="25dp"
+        android:text="@string/student"
+        android:textColor="@color/white" />
+
     <Button
         android:id="@+id/professorButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/professor"
-        android:padding="25dp"
-        android:textColor="@color/white"
-        android:background="#99A58B"
         android:layout_margin="30dp"
+        android:background="@drawable/special_button"
         android:onClick="gotoProfessorsPage"
-        />
+        android:padding="25dp"
+        android:text="@string/professor"
+        android:textColor="@color/white" />
+
     <Button
         android:id="@+id/adminButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/admin"
         android:layout_margin="30dp"
-        android:padding="25dp"
-        android:textColor="@color/white"
-
-        android:background="#1B7A7A"
+        android:background="@drawable/special_button"
         android:onClick="goToAdminPage"
-        />
+        android:padding="25dp"
+        android:text="@string/admin"
+        android:textColor="@color/white" />
 
 
 </LinearLayout>

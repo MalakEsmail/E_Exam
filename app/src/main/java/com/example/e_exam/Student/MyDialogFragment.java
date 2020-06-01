@@ -13,18 +13,22 @@ import androidx.fragment.app.DialogFragment;
 
 
 public class MyDialogFragment extends DialogFragment {
+    private String subject;
+
+    public MyDialogFragment(String subject) {
+        this.subject = subject;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 
 
         //exam question number and time will get from num ant time that professor detect
-        //todo professor is responsible for those two variables
-        int num=5;
         //todo time 1 usage
         int time=60;
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-        builder.setMessage("Your Exam contains "+num+" questions At "+time+" minutes");
+        builder.setMessage("Your Exam Time is :  "+time+" minutes");
         builder.setCancelable(false);
         builder.setPositiveButton("Start", new DialogInterface.OnClickListener() {
             @Override

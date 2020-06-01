@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
+            android:inputType="textEmailAddress"
             android:hint="@string/enter_your_email" />
 
         <EditText
@@ -33,15 +34,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
             android:hint="@string/enter_your_password"
-
-            />
+            android:inputType="textPassword" />
 
         <EditText
             android:id="@+id/studentConfirmPasswordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
-            android:hint="@string/confirm_password" />
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword" />
 
         <com.jaredrummler.materialspinner.MaterialSpinner
             android:id="@+id/departments_spinner"

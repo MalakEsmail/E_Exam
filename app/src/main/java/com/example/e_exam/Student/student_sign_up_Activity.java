@@ -40,7 +40,7 @@ public class student_sign_up_Activity extends AppCompatActivity {
     private DatabaseReference reference;
     private List<String> departmentsList, levelsList;
 
-    private String name, email, password, confirmPassword;
+    private String name, email, password, confirmPassword, departmentName, levelName, userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,10 @@ public class student_sign_up_Activity extends AppCompatActivity {
         emailEt = findViewById(R.id.studentEmailEditText);
         passwordEt = findViewById(R.id.studentPasswordEditText);
         confirmPasswordEt = findViewById(R.id.studentConfirmPasswordEditText);
+
+        getSelectedDept();
+        getSelectedLevel();
+
         signUp = findViewById(R.id.studentSignUpButton);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,77 +68,7 @@ public class student_sign_up_Activity extends AppCompatActivity {
                 validateInputs();
             }
         });
-//        studentLoginButton = (Button) findViewById(R.id.studentSignInButton);
-//
-//        //spinner for departments
-//        Spinner spinner = findViewById(R.id.departments_spinner);
-//
-//        //ToDO Admin who is responsible for adding available departments
-//
-//        //Array for departments options
-//        ArrayList<String> arrayList = new ArrayList<>();
-//        arrayList.add("CS");
-//        arrayList.add("SE");
-//        arrayList.add("IT");
-//        arrayList.add("IS");
-//
-//        //Array adapter fpr departments spinner
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayList);
-//
-//        //set drop down on spinner department
-//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(arrayAdapter);
-//
-//        //spinner for levels option
-//        Spinner levels_spinner = findViewById(R.id.levels_spinner);
-//
-//        //ToDO Admin who responsible for adding available levels
-//        //Array for levels options
-//        ArrayList<String> levelsArrayList = new ArrayList<>();
-//        levelsArrayList.add("one");
-//        levelsArrayList.add("two");
-//        levelsArrayList.add("three");
-//        levelsArrayList.add("four");
-//
-//        //Array adapter fpr levels spinner
-//        ArrayAdapter<String> levelsarrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, levelsArrayList);
-//
-//        //set drop down on spinner levels
-//        levelsarrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        levels_spinner.setAdapter(levelsarrayAdapter);
-//
-//
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String DepartmentName = parent.getItemAtPosition(position).toString();
-//                //Toast.makeText(parent.getContext(), "Selected: " + DepartmentName,Toast.LENGTH_LONG).show();
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//            }
-//        });
-//        levels_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String levelNumber = parent.getItemAtPosition(position).toString();
-//                // Toast.makeText(parent.getContext(), "Selected: " + levelNumber,Toast.LENGTH_LONG).show();
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//            }
-//        });
-//       /* studentLoginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i=new Intent(loginActivity.class,studentSubjectsActivity.class);
-//                startActivity(i);
-//            }
-//        });*/
+
     }
 
 
@@ -184,11 +118,31 @@ public class student_sign_up_Activity extends AppCompatActivity {
         levelSpinner.setItems(levelsList);
     }
 
+    private void getSelectedDept() {
+        departmentSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                departmentName = item.toString();
+            }
+        });
+    }
+
+    private void getSelectedLevel() {
+        levelSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
+                levelName = item.toString();
+            }
+        });
+    }
+
+
     private void validateInputs() {
         name = nameEt.getText().toString();
         email = emailEt.getText().toString();
         password = passwordEt.getText().toString();
         confirmPassword = confirmPasswordEt.getText().toString();
+
         if (TextUtils.isEmpty(name)) {
             Toast.makeText(this, "Enter Your Name..", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(email)) {
@@ -197,38 +151,47 @@ public class student_sign_up_Activity extends AppCompatActivity {
             Toast.makeText(this, "Enter Valid Password ..", Toast.LENGTH_SHORT).show();
         } else if (!(confirmPassword.equals(password))) {
             Toast.makeText(this, "Password Not Matching !", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(departmentName)) {
+            Toast.makeText(this, "please.. select your department ", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(levelName)) {
+            Toast.makeText(this, "please.. select your Level ", Toast.LENGTH_SHORT).show();
         } else {
             setToAuth();
-            Toast.makeText(this, "Done..", Toast.LENGTH_SHORT).show();
 
         }
     }
 
     private void setToAuth() {
-        final FirebaseAuth auth=FirebaseAuth.getInstance();
-        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        final FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    FirebaseUser firebaseUser=auth.getCurrentUser();
-                    assert  firebaseUser!= null;
-                    String userId=firebaseUser.getUid();
-                    saveToDB(userId);
+                if (task.isSuccessful()) {
+                    FirebaseUser firebaseUser = auth.getCurrentUser();
+                    assert firebaseUser != null;
+                    userId = firebaseUser.getUid();
+                    saveToDB();
                 }
             }
         });
     }
 
-    private void saveToDB(final String userId) {
-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Students");
+    private void saveToDB() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Students");
         HashMap hashMap = new HashMap<>();
         hashMap.put("userName", name);
         hashMap.put("userEmail", email);
         hashMap.put("userPassword", password);
-        DatabaseReference ref=reference.child(userId);
-        ref.updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
+        hashMap.put("userId", userId);
+        hashMap.put("departmentName", departmentName);
+        hashMap.put("levelName", levelName);
+
+
+        reference.child(userId).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
             @Override
             public void onSuccess(Object o) {
+                Toast.makeText(getBaseContext(), "Done successfully..", Toast.LENGTH_SHORT).show();
+
                 Intent i = new Intent(student_sign_up_Activity.this, studentLoginActivity.class);
                 startActivity(i);
 

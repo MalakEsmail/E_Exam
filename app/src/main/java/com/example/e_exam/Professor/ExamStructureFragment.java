@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.e_exam.R;
 import com.example.e_exam.model.Question;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,20 +26,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ExamStructureFragment extends Fragment {
-    DatabaseReference reference;
-    Spinner chapterSpinner;
-    Spinner questionTypeSpinner;
-    Spinner categorySpinner;
-    ArrayList<String> chapterArray;
-    ArrayList<String> categoryList;
-    ArrayList<String> questionTypesList;
-    ArrayAdapter<String> chapterAdapter;
-    ArrayAdapter<String> adapter;
-    ArrayAdapter<String> questionAdapter;
-    String subject, time, questionNum, chapter, type, category;
+    private DatabaseReference reference;
+
+    private Spinner chapterSpinner, questionTypeSpinner, categorySpinner;
+
+    private ArrayList<String> chapterArray, categoryList, questionTypesList;
+
+    private ArrayAdapter<String> chapterAdapter, adapter, questionAdapter;
+
+    private String subject, time, questionNum, chapter, type, category;
+
     ValueEventListener listener;
     Question question;
     ArrayList<Question> questionsArr;
@@ -93,9 +95,36 @@ public class ExamStructureFragment extends Fragment {
             chapter = chapterSpinner.getSelectedItem().toString();
             type = questionTypeSpinner.getSelectedItem().toString();
             category = categorySpinner.getSelectedItem().toString();
-            getQuestionsFromDb();
+            addToDB();
+            // getQuestionsFromDb();
             //  Toast.makeText(getContext(), "correct Answer"+questionsArr.get(0), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void addToDB() {
+        HashMap hashMap = new HashMap();
+        hashMap.put("subject", subject);
+        hashMap.put("chapter", chapter);
+        hashMap.put("questionType", type);
+        hashMap.put("category", category);
+        hashMap.put("time", time);
+        hashMap.put("questionNumber", questionNum);
+
+        reference.child("examStructure").child(subject).push().updateChildren(hashMap)
+                .addOnSuccessListener(new OnSuccessListener() {
+                    @Override
+                    public void onSuccess(Object o) {
+                        Toast.makeText(getContext(), "Exam Structure Added Successfully..", Toast.LENGTH_SHORT).show();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "Check your Internet Connection ..And Try Again !", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
     private void getQuestionsFromDb() {
