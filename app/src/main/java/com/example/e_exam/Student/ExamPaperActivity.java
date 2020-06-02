@@ -76,7 +76,7 @@ public class ExamPaperActivity extends AppCompatActivity {
         timer = new CountDownTimer(60*60*time, 60) {
             @Override
             public void onTick(long millisUntilFinished) {
-                showTimer.setText("seconds remaining: " + ((millisUntilFinished / 1000) + 1));
+                showTimer.setText("seconds remaining : " + ((millisUntilFinished / 1000) + 1));
             }
 
             @Override

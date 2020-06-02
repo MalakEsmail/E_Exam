@@ -1,47 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:layout_margin="30dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-       <EditText
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <EditText
         android:id="@+id/ExamAllowedTimeEditTextId"
-        android:padding="20dp"
-        android:hint="Enter Exam Allowed Time hh:mm"
-        android:inputType="time"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/edit_text"
+        android:gravity="center"
+
+        android:hint="Enter Exam Allowed Time hh:mm"
+        android:inputType="time" />
+
     <Spinner
         android:id="@+id/spinnerChooseChapterId"
-        android:padding="20dp"
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+
+        android:layout_margin="20dp" />
+
     <Spinner
         android:id="@+id/spinnerChooseQuestionTypeId"
-        android:padding="20dp"
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+
+        android:layout_margin="20dp" />
+
     <Spinner
         android:id="@+id/spinnerChooseCategoryId"
-        android:padding="20dp"
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+
+        android:layout_margin="20dp" />
+
     <EditText
         android:id="@+id/allowedQuestionEditTextId"
-        android:hint="Question needed number"
-        android:padding="20dp"
-            android:inputType="number"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+
+        android:background="@drawable/edit_text"
+        android:gravity="center"
+        android:hint="Question needed number"
+        android:inputType="number" />
+
     <Button
         android:id="@+id/buttonAddExamQuestionId"
-        android:text="set"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/special_button"
+        android:text="set"
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>

@@ -1,33 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="150dp"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="150dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".Admin.AdminLoginActivity">
+
     <EditText
         android:id="@+id/adminEmailEditTextId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_your_email"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text"
+        android:gravity="center"
+        android:inputType="textEmailAddress"
         android:layout_margin="30dp"
+
+        android:hint="@string/enter_your_email"
+
         />
+
     <EditText
         android:id="@+id/adminPasswordEditTextId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_your_password"
+        android:layout_height="50dp"
         android:layout_margin="30dp"
-        />
+        android:background="@drawable/edit_text"
+        android:gravity="center"
+        android:hint="@string/enter_your_password"
+        android:inputType="textPassword" />
+
     <Button
         android:id="@+id/adminLoginButtonId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:background="@drawable/special_button"
         android:text="@string/login"
-        />
+        android:textColor="#FFFFFF" />
 </LinearLayout>
 

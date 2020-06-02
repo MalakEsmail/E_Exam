@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:padding="25dp"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="25dp">
+
     <Spinner
         android:id="@+id/add_subject_level_spinner_id"
         android:layout_width="250dp"
@@ -13,6 +13,7 @@
         android:layout_margin="30dp"
 
         />
+
     <Spinner
         android:id="@+id/add_subject_department_spinner_id"
         android:layout_width="250dp"
@@ -20,19 +21,25 @@
         android:layout_margin="30dp"
 
         />
+
     <EditText
         android:id="@+id/add_Subject_EditText_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_subject_name"
+        android:layout_height="50dp"
         android:layout_margin="30dp"
-        />
+        android:background="@drawable/edit_text"
+        android:gravity="center"
+        android:hint="@string/enter_subject_name" />
+
     <Button
         android:id="@+id/add_subject_Button_id"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:background="@drawable/special_button"
         android:text="Add"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
 
         />
 

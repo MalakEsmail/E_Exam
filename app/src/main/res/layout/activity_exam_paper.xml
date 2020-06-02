@@ -1,59 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_marginTop="30dp"
     android:gravity="center_horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textViewTimerId"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="50dp"
+        android:hint="Timer : "
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
         android:padding="30dp"
         android:paddingBottom="20dp"
-        android:text="Timer"
+
         />
 
     <TextView
         android:id="@+id/questionTitleId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="30dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
         android:layout_marginBottom="25dp"
+        android:background="@drawable/special_button"
+        android:gravity="center"
         android:text="Question Title"
-        />
+        android:textColor="#FFFFFF" />
+
     <RadioGroup
         android:id="@+id/radioGroupId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_margin="30dp"
+        android:padding="10dp">
+
         <RadioButton
             android:id="@+id/radioButton1Id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text"
+
+            android:textColor="#000000" />
+
+
         <RadioButton
             android:id="@+id/radioButton2Id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text"
+            android:textColor="#000000" />
+
         <RadioButton
             android:id="@+id/radioButton3Id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text"
+            android:textColor="#000000" />
+
+
         <RadioButton
             android:id="@+id/radioButton4Id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text"
+            android:textColor="#000000" />
+
 
     </RadioGroup>
+
     <Button
         android:id="@+id/buttonNextId"
-        android:text="Next"
-        android:layout_marginTop="30dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="90dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_marginTop="30dp"
+        android:background="@drawable/special_button"
+        android:text="Next"
+        android:textColor="#FFFFFF" />
 
 
 </LinearLayout>

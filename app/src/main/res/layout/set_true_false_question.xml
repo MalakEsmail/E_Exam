@@ -1,38 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center"
-    android:padding="30dp"
-    android:layout_margin="20dp"
-    android:layout_height="match_parent">
+    android:orientation="vertical">
+
     <EditText
         android:id="@+id/set_Category_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_margin="20dp"
-        android:hint="Category A or B or C"
+        android:background="@drawable/edit_text"
+        android:gravity="center"
+        android:hint="Category A or B or C" />
 
-        />
     <EditText
         android:id="@+id/true_false_questionEditText_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_margin="20dp"
+        android:background="@drawable/edit_text"
+
+        android:gravity="center"
         android:hint="Question" />
+
     <EditText
+        android:id="@+id/true_false_correctAnswer_EditText_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="correct Answer"
+        android:layout_height="50dp"
         android:layout_margin="20dp"
-        android:id="@+id/true_false_correctAnswer_EditText_id"/>
+        android:background="@drawable/edit_text"
+
+        android:gravity="center"
+        android:hint="correct Answer" />
 
     <Button
         android:id="@+id/true_false_button_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-
-        android:text="Add" />
+        android:background="@drawable/special_button"
+        android:text="Add"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>

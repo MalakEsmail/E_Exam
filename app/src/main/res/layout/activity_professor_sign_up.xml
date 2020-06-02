@@ -1,44 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".Professor.ProfessorSignUpActivity">
+
     <EditText
         android:id="@+id/professorUserNameEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/Enter_Your_Name"
+        android:layout_height="50dp"
         android:layout_margin="30dp"
-        />
+        android:background="@drawable/edit_text"
+        android:gravity="center"
+        android:hint="@string/Enter_Your_Name"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/ProfessorPhoneEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your Phone"
+        android:layout_height="50dp"
         android:layout_margin="30dp"
+        android:background="@drawable/edit_text"
+        android:gravity="center"
+        android:hint="Enter your Phone"
+        android:inputType="phone"
+
         />
 
     <EditText
         android:id="@+id/professorPasswordEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_your_password"
+        android:layout_height="50dp"
         android:layout_margin="30dp"
+        android:background="@drawable/edit_text"
+        android:gravity="center"
+        android:hint="@string/enter_your_password"
+        android:inputType="textPassword" />
 
-        />
     <EditText
         android:id="@+id/ProfessorConfirmPasswordEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/confirm_password"
+        android:layout_height="50dp"
         android:layout_margin="30dp"
-
-        />
+        android:background="@drawable/edit_text"
+        android:gravity="center"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword" />
 
 
     <Button
@@ -46,7 +55,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:text="@string/signup_and_login"
+        android:background="@drawable/special_button"
+        android:text="Sign Up"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
 
         />
 

@@ -1,43 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="150dp"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="150dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".Professor.professorLoginActivity">
 
     <EditText
         android:id="@+id/ProfessorLoginPhoneEditTextId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Your Phone"
+        android:layout_height="50dp"
         android:layout_margin="30dp"
-        />
+        android:background="@drawable/edit_text"
+        android:gravity="center"
+        android:hint="Enter Your Phone"
+
+        android:inputType="phone" />
 
     <EditText
         android:id="@+id/ProfessorLoginPasswordEditTextId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_your_password"
+        android:layout_height="50dp"
         android:layout_margin="30dp"
+        android:background="@drawable/edit_text"
+        android:gravity="center"
+        android:hint="@string/enter_your_password"
+        android:inputType="textPassword"
 
         />
+
     <Button
         android:id="@+id/ProfessorSignInButtonId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:background="@drawable/special_button"
         android:text="@string/login"
-        />
+        android:textColor="#FFFFFF" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Or SignUp From Here"
         android:onClick="GotoProfessorSignUpPage"
-        />
+        android:text="Or SignUp From Here" />
 
 </LinearLayout>
 

@@ -2,27 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/addChaptersId"
-            android:title="Add Chapters"
-            android:icon="@drawable/levels"
-            />
-        <item
-            android:id="@+id/showOrEditChaptersId"
-            android:title="Add Questions to chapters"
-            android:icon="@drawable/levels"
-            />
-
-        <item
-            android:id="@+id/ExamsStructureId"
-            android:title="Exam Structure"
-            android:icon="@drawable/deptss"
-            />
-
-        <item
             android:id="@+id/FinishId"
-            android:title="Finish"
             android:icon="@drawable/logout"
-            />
+            android:title="Logout" />
 
     </group>
 </menu>

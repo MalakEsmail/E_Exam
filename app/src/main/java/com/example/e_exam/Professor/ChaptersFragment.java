@@ -66,7 +66,7 @@ public class ChaptersFragment extends Fragment {
                     public void onClick(View v) {
                         CharSequence option[] = new CharSequence[]{
                                 "Delete",
-                                "Add Subjects"
+                                "Add Questions"
                         };
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         builder.setTitle("Managing this Chapter By : ");

@@ -1,74 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:layout_margin="30dp"
-    android:padding="30dp"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <EditText
-        android:id="@+id/set_Category_id"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+
+    >
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Category A or B or C"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
 
-        />
-    <EditText
-        android:id="@+id/question_editText_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Question"
+        <EditText
+            android:id="@+id/set_Category_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text"
+            android:gravity="center"
+            android:hint="Category A or B or C" />
 
-        />
-    <EditText
-        android:id="@+id/option1_editText_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Option 1"
-        android:paddingTop="30dp"
-        />
-    <EditText
-        android:id="@+id/option2_editText_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Option 2"
-        android:paddingTop="30dp"
+        <EditText
+            android:id="@+id/question_editText_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text"
+            android:gravity="center"
+            android:hint="Question" />
 
-        />
-    <EditText
-        android:id="@+id/option3_editText_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Option 3"
-        android:paddingTop="30dp"
+        <EditText
+            android:id="@+id/option1_editText_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text"
+            android:gravity="center"
+            android:hint="Option 1" />
 
-        />
-    <EditText
-        android:id="@+id/option4_editText_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Option 4"
-        android:paddingTop="30dp"
+        <EditText
+            android:id="@+id/option2_editText_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text"
+            android:gravity="center"
+            android:hint="Option 2"
 
-        />
-    <EditText
-        android:id="@+id/correctAnswer_editText_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Correct Answer"
-        android:paddingTop="30dp"
+            />
 
-        />
+        <EditText
+            android:id="@+id/option3_editText_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text"
+            android:gravity="center"
+            android:hint="Option 3" />
 
+        <EditText
+            android:id="@+id/option4_editText_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text"
+            android:gravity="center"
+            android:hint="Option 4" />
 
-    <Button
-        android:id="@+id/add_question_Button_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Question"
+        <EditText
+            android:id="@+id/correctAnswer_editText_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/edit_text"
+            android:gravity="center"
+            android:hint="Correct Answer" />
 
-
-        />
-
-</LinearLayout>
+        <Button
+            android:id="@+id/add_question_Button_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/special_button"
+            android:text="Add Question"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+</ScrollView>

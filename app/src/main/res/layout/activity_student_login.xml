@@ -11,18 +11,22 @@
     <EditText
         android:id="@+id/studentLoginEmailEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_margin="30dp"
+        android:background="@drawable/edit_text"
+        android:gravity="center"
         android:hint="@string/enter_your_email"
         android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/studentLoginPasswordEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_margin="30dp"
-        android:inputType="textPassword"
+        android:background="@drawable/edit_text"
+        android:gravity="center"
         android:hint="@string/enter_your_password"
+        android:inputType="textPassword"
 
         />
 
@@ -31,8 +35,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:background="@drawable/special_button"
         android:onClick="openStudentPage"
-        android:text="@string/login" />
+        android:text="@string/login"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:layout_width="wrap_content"

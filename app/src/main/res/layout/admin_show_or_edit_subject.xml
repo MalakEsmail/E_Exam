@@ -2,30 +2,32 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <Spinner
         android:id="@+id/show_edit_subject_level_spinner_id"
-        android:layout_width="250dp"
-        android:layout_height="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_margin="30dp"
 
         />
     <Spinner
         android:id="@+id/show_edit_subject_department_spinner_id"
-        android:layout_width="250dp"
-        android:layout_height="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_margin="30dp"
 
         />
     <Button
         android:id="@+id/show_subjects_Button_id"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/special_button"
         android:text="Show Subjects"
-
+        android:textAllCaps="false"
         />
 
 
