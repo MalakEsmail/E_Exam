@@ -17,17 +17,17 @@ import com.example.e_exam.R;
 public class HomeFragment extends Fragment {
     FragmentTransaction transaction;
     FragmentManager manager;
-    String subject;
+    String subject, phone;
 
-    public HomeFragment(String subject) {
+    public HomeFragment(String subject, String phone) {
         this.subject = subject;
+        this.phone = phone;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         manager = getFragmentManager();
         transaction = manager.beginTransaction();
 
@@ -39,14 +39,16 @@ public class HomeFragment extends Fragment {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Profile profile1 = new Profile(phone);
+                transaction.replace(R.id.frame_Subject_container, profile1);
+                transaction.commit();
             }
         });
 
         addChapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddChaptersFragment addChaptFragment = new AddChaptersFragment(subject);
+                AddChaptersFragment addChaptFragment = new AddChaptersFragment(subject, phone);
                 transaction.replace(R.id.frame_Subject_container, addChaptFragment);
                 transaction.commit();
             }
@@ -55,7 +57,7 @@ public class HomeFragment extends Fragment {
         addQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ChaptersFragment showEditchpFragment = new ChaptersFragment(subject);
+                ChaptersFragment showEditchpFragment = new ChaptersFragment(subject, phone);
                 transaction.replace(R.id.frame_Subject_container, showEditchpFragment);
                 transaction.commit();
             }
@@ -64,7 +66,7 @@ public class HomeFragment extends Fragment {
         examStructure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExamStructureFragment examStructureFragment = new ExamStructureFragment(subject);
+                ExamStructureFragment examStructureFragment = new ExamStructureFragment(subject, phone);
                 transaction.replace(R.id.frame_Subject_container, examStructureFragment);
                 transaction.commit();
             }

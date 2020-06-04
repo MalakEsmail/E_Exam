@@ -20,10 +20,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class AdminLoginActivity extends AppCompatActivity {
-    EditText emailEditText,passwordEditText;
+    EditText emailEditText, passwordEditText;
     Button buttonLogin;
     DatabaseReference databaseReference;
-     String email;
+    String email;
     String password;
     private ProgressDialog loadingBar;
 
@@ -33,23 +33,23 @@ public class AdminLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login);
 
-        emailEditText=(EditText)findViewById(R.id.adminEmailEditTextId);
-        passwordEditText=(EditText)findViewById(R.id.adminPasswordEditTextId);
-        buttonLogin=(Button) findViewById(R.id.adminLoginButtonId);
+        emailEditText = (EditText) findViewById(R.id.adminEmailEditTextId);
+        passwordEditText = (EditText) findViewById(R.id.adminPasswordEditTextId);
+        buttonLogin = (Button) findViewById(R.id.adminLoginButtonId);
 
         loadingBar = new ProgressDialog(this);
 
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("Admins");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Admins");
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                email=emailEditText.getText().toString();
-                password=passwordEditText.getText().toString();
-                if(TextUtils.isEmpty(email)){
+                email = emailEditText.getText().toString();
+                password = passwordEditText.getText().toString();
+                if (TextUtils.isEmpty(email)) {
                     Toast.makeText(AdminLoginActivity.this, " Please..Enter your Email ", Toast.LENGTH_SHORT).show();
-                }else if(TextUtils.isEmpty(password)){
+                } else if (TextUtils.isEmpty(password)) {
                     Toast.makeText(AdminLoginActivity.this, "Please..Enter your password ", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     // wait to check is phone number is available in database
                     loadingBar.setTitle("Login Account");
                     loadingBar.setMessage("please wait , while we are checking the credentials .");
@@ -61,36 +61,41 @@ public class AdminLoginActivity extends AppCompatActivity {
             }
         });
     }
-        private void openAdminPage() {
+
+    private void openAdminPage() {
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child("1").exists() || dataSnapshot.child("2").exists()){
+                if (dataSnapshot.child("1").exists() || dataSnapshot.child("2").exists()) {
                     //first Admin Email and password
-                    String dbEmail= String.valueOf(dataSnapshot.child("1").child("email").getValue());
-                    String dbpassword= String.valueOf(dataSnapshot.child("1").child("password").getValue());
+                    String dbEmail = String.valueOf(dataSnapshot.child("1").child("email").getValue());
+                    String dbpassword = String.valueOf(dataSnapshot.child("1").child("password").getValue());
                     //second Admin Email and password
-                    String dbSecondEmail= String.valueOf(dataSnapshot.child("2").child("email").getValue());
-                    String dbSecondpassword= String.valueOf(dataSnapshot.child("2").child("password").getValue());
+                    String dbSecondEmail = String.valueOf(dataSnapshot.child("2").child("email").getValue());
+                    String dbSecondpassword = String.valueOf(dataSnapshot.child("2").child("password").getValue());
 
-                    if(dbEmail.equals(email)&& dbpassword.equals(password) || (dbSecondEmail.equals(email)&& dbSecondpassword.equals(password))){
+                    if (dbEmail.equals(email) && dbpassword.equals(password) || (dbSecondEmail.equals(email) && dbSecondpassword.equals(password))) {
                         Toast.makeText(AdminLoginActivity.this, "logging successfully", Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
 
-                            Intent i=new Intent(AdminLoginActivity.this,AdminActivity.class);
-                            startActivity(i);
-                    }
-                    else{
+                        Intent i = new Intent(AdminLoginActivity.this, AdminActivity.class);
+                        startActivity(i);
+                        finish();
+                        emailEditText.setText("");
+                        passwordEditText.setText("");
+
+
+                    } else {
                         Toast.makeText(AdminLoginActivity.this, " someThing Wrong ", Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
 
                     }
-                }
-                else{
+                } else {
                     Toast.makeText(AdminLoginActivity.this, "not found this Admin", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }

@@ -11,7 +11,7 @@ import com.example.e_exam.R;
 
 public class DepartmentsViewHolder extends RecyclerView.ViewHolder {
     public TextView departmentName;
-    Button deleteDepartment;
+    public Button deleteDepartment;
     public DepartmentsViewHolder(@NonNull View itemView) {
         super(itemView);
         departmentName=itemView.findViewById(R.id.departmentTextViewIdOnList);

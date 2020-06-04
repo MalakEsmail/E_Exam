@@ -30,20 +30,21 @@ public class ChaptersFragment extends Fragment {
     FirebaseRecyclerAdapter<Chapters, ChaptersViewHolder> adapter;
 
     DatabaseReference reference;
-   String subName;
+    String subName, phone;
 
-    public ChaptersFragment(String subName) {
+    public ChaptersFragment(String subName, String phone) {
         this.subName = subName;
+        this.phone = phone;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View view=inflater.inflate(R.layout.recycler_view,container,false);
+        View view = inflater.inflate(R.layout.recycler_view, container, false);
 
-        recyclerView=(RecyclerView)view.findViewById(R.id.RecyclerViewId);
+        recyclerView = (RecyclerView) view.findViewById(R.id.RecyclerViewId);
         recyclerView.setHasFixedSize(true);
-        layoutManager=new LinearLayoutManager(getContext());
+        layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         showFromDatabase();
 
@@ -52,12 +53,12 @@ public class ChaptersFragment extends Fragment {
     }
 
     private void showFromDatabase() {
-        reference= FirebaseDatabase.getInstance().getReference().child("chapters").child(subName);
+        reference = FirebaseDatabase.getInstance().getReference().child("chapters").child(subName);
 
         final FirebaseRecyclerOptions<Chapters> options = new FirebaseRecyclerOptions.Builder<Chapters>()
                 .setQuery(reference, Chapters.class)
                 .build();
-        adapter=new FirebaseRecyclerAdapter<Chapters, ChaptersViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Chapters, ChaptersViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull ChaptersViewHolder holder, int i, @NonNull final Chapters chapters) {
                 holder.chapterName.setText(chapters.getChapterName());
@@ -73,12 +74,12 @@ public class ChaptersFragment extends Fragment {
                         builder.setItems(option, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int i) {
-                                if(i==0){
+                                if (i == 0) {
                                     Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
-                                reference.child(chapters.getChapterName()).removeValue();
+                                    reference.child(chapters.getChapterName()).removeValue();
                                 }
-                                if(i==1){
-                                    Fragment fragment = new AddQuestionFragment(subName,chapters.getChapterName());
+                                if (i == 1) {
+                                    Fragment fragment = new AddQuestionFragment(subName, chapters.getChapterName(),phone);
                                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                     fragmentTransaction.replace(R.id.frame_Subject_container, fragment);
@@ -103,6 +104,7 @@ public class ChaptersFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
     }
+
     @Override
     public void onStart() {
         super.onStart();

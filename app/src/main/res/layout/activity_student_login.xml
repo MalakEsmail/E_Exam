@@ -38,6 +38,7 @@
         android:background="@drawable/special_button"
         android:onClick="openStudentPage"
         android:text="@string/login"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF" />
 
     <TextView

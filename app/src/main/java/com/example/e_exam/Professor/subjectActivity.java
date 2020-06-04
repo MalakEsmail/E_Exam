@@ -1,5 +1,6 @@
 package com.example.e_exam.Professor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -9,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.e_exam.MainActivity;
 import com.example.e_exam.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,7 +24,7 @@ public class subjectActivity extends AppCompatActivity implements NavigationView
     NavigationView subject_navigationView;
     FragmentTransaction transaction;
     FragmentManager manager;
-    String subject;
+    String subject, phone;
 
 
     @Override
@@ -29,6 +32,8 @@ public class subjectActivity extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject);
         subject = getIntent().getExtras().getString("sub");
+        phone = getIntent().getExtras().getString("phone");
+
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();
 
@@ -43,7 +48,7 @@ public class subjectActivity extends AppCompatActivity implements NavigationView
 
         subject_navigationView.setNavigationItemSelectedListener(this);
 
-        HomeFragment homeFragment = new HomeFragment(subject);
+        HomeFragment homeFragment = new HomeFragment(subject, phone);
         transaction.replace(R.id.frame_Subject_container, homeFragment);
         transaction.commit();
     }
@@ -53,11 +58,30 @@ public class subjectActivity extends AppCompatActivity implements NavigationView
         switch (menuItem.getItemId()) {
 
             case R.id.FinishId:
+
                 finish();
+                Intent i = new Intent(subjectActivity.this, MainActivity.class);
+                startActivity(i);
                 break;
         }
         subject_drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        replaceFragment(getSupportFragmentManager(), new HomeFragment(subject, phone), R.id.frame_Subject_container);
+        Intent i = new Intent(subjectActivity.this, MainActivity.class);
+        startActivity(i);
+    }
+
+    public static void replaceFragment(FragmentManager getChildFragmentManager, Fragment fragment, int id) {
+        FragmentTransaction transaction = getChildFragmentManager.beginTransaction();
+        transaction.replace(id, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 }

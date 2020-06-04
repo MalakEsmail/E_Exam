@@ -44,7 +44,7 @@
                         <ImageView
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:src="@drawable/subjects" />
+                            android:src="@drawable/proreq" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
                         <ImageView
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:src="@drawable/subjects" />
+                            android:src="@drawable/adddd" />
 
                         <TextView
                             android:layout_width="wrap_content"

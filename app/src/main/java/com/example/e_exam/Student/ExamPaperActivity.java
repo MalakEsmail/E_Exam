@@ -28,6 +28,7 @@ public class ExamPaperActivity extends AppCompatActivity {
     private TextView showTimer, questionTitleTV;
     private String question, option1, option2, option3, option4, correctAnswer;
     private String subject, chapter, questionType, category, time, questionNumber;
+    private String valueSelected, userId;
 
     private RadioGroup radioButtonGroup;
     private RadioButton option1RadioBut, option3RadioBut, option2RadioBut, option4RadioBut;
@@ -47,6 +48,8 @@ public class ExamPaperActivity extends AppCompatActivity {
     int degree = 0;
     int x = 0;
     int lastQuestionIndex;
+    private RadioButton radioButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,8 @@ public class ExamPaperActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         subject = intent.getStringExtra("subject");
-        Toast.makeText(this, "" + subject, Toast.LENGTH_SHORT).show();
+        userId = intent.getStringExtra("id");
+
         examStructureRef = FirebaseDatabase.getInstance().getReference();
 
         showTimer = (TextView) findViewById(R.id.textViewTimerId);
@@ -71,9 +75,8 @@ public class ExamPaperActivity extends AppCompatActivity {
 
         next = (Button) findViewById(R.id.buttonNextId);
 
-        //todo time 2 usage
-        int time=2;
-        timer = new CountDownTimer(60*60*time, 60) {
+        int time = 2;
+        timer = new CountDownTimer(15000 * time, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 showTimer.setText("seconds remaining : " + ((millisUntilFinished / 1000) + 1));
@@ -83,7 +86,10 @@ public class ExamPaperActivity extends AppCompatActivity {
             public void onFinish() {
                 Intent i = new Intent(ExamPaperActivity.this, ExamDegree.class);
                 i.putExtra("degree", degree);
-                Toast.makeText(ExamPaperActivity.this, "Time finished", Toast.LENGTH_SHORT).show();
+                i.putExtra("id", userId);
+                i.putExtra("subject", subject);
+
+                //  Toast.makeText(ExamPaperActivity.this, "Time finished", Toast.LENGTH_SHORT).show();
                 startActivity(i);
                 finish();
             }
@@ -102,9 +108,13 @@ public class ExamPaperActivity extends AppCompatActivity {
 //                        getExamStructure();
                     Intent i = new Intent(ExamPaperActivity.this, ExamDegree.class);
                     i.putExtra("degree", degree);
-                    startActivity(i);
+                    i.putExtra("id", userId);
+                    i.putExtra("subject", subject);
+
                     finish();
+                    startActivity(i);
                 } else {
+                    radioButton.setChecked(false);
                     if (index == count) {
                         x += 1;
                         index = 0;
@@ -115,6 +125,7 @@ public class ExamPaperActivity extends AppCompatActivity {
                         getExamStructure();
 
                     }
+
                 }
 
 
@@ -138,21 +149,10 @@ public class ExamPaperActivity extends AppCompatActivity {
 //                  //  setQuestionStore();
 //                }
 
-                radioButtonGroup.clearCheck();
 
             }
         });
-        radioButtonGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                View selectedRadioButton = radioButtonGroup.findViewById(checkedId);
-                int selectedRadioButtonIndex = radioButtonGroup.indexOfChild(selectedRadioButton);
-//                if (selectedRadioButtonIndex == correctAnswer) {
-//                    ++degree;
-//                }
 
-            }
-        });
 
     }
 
@@ -226,6 +226,28 @@ public class ExamPaperActivity extends AppCompatActivity {
         option3RadioBut.setText(option3);
         option4RadioBut.setText(option4);
 
+        getSelectedOption(correctAnswer);
+    }
+
+    private void getSelectedOption(final String correctAnswer) {
+        radioButtonGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                int selectedId = group.getCheckedRadioButtonId();
+
+                radioButton = (RadioButton) findViewById(selectedId);
+                valueSelected = radioButton.getText().toString();
+
+                if (valueSelected.equalsIgnoreCase(correctAnswer)) {
+
+                    ++degree;
+                    Toast.makeText(ExamPaperActivity.this, "degree :" + degree, Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
     }
 
 }

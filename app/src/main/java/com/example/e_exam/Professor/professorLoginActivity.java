@@ -20,9 +20,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class professorLoginActivity extends AppCompatActivity {
-    EditText phoneEditText,passwordEditText;
+    EditText phoneEditText, passwordEditText;
     Button buttonLogin;
-    String phone,password;
+    String phone, password;
     DatabaseReference ref;
     private ProgressDialog loadingBar;
 
@@ -31,12 +31,12 @@ public class professorLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_login);
-        phoneEditText=(EditText)findViewById(R.id.ProfessorLoginPhoneEditTextId);
-        passwordEditText=(EditText)findViewById(R.id.ProfessorLoginPasswordEditTextId);
-        buttonLogin=(Button) findViewById(R.id.ProfessorSignInButtonId);
+        phoneEditText = (EditText) findViewById(R.id.ProfessorLoginPhoneEditTextId);
+        passwordEditText = (EditText) findViewById(R.id.ProfessorLoginPasswordEditTextId);
+        buttonLogin = (Button) findViewById(R.id.ProfessorSignInButtonId);
         loadingBar = new ProgressDialog(this);
 
-        ref= FirebaseDatabase.getInstance().getReference().child("Professors").child("ProfessorsList");
+        ref = FirebaseDatabase.getInstance().getReference().child("Professors").child("ProfessorsList");
 
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -49,31 +49,31 @@ public class professorLoginActivity extends AppCompatActivity {
     }
 
     private void validation() {
-        phone=phoneEditText.getText().toString();
-        password=passwordEditText.getText().toString();
-        if(TextUtils.isEmpty(phone)){
+        phone = phoneEditText.getText().toString();
+        password = passwordEditText.getText().toString();
+        if (TextUtils.isEmpty(phone)) {
             Toast.makeText(professorLoginActivity.this, " Please..Enter your Phone ", Toast.LENGTH_SHORT).show();
-        }else if(TextUtils.isEmpty(password)){
+        } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(professorLoginActivity.this, "Please..Enter your password ", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             checkInRequestsOrNot();
         }
     }
 
     private void checkInRequestsOrNot() {
-        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Professors").child("Requests");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Professors").child("Requests");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String phoneRequest= String.valueOf(dataSnapshot.child(phone).child("phone").getValue());
-                if(dataSnapshot.child(phoneRequest).exists()){
+                String phoneRequest = String.valueOf(dataSnapshot.child(phone).child("phone").getValue());
+                if (dataSnapshot.child(phoneRequest).exists()) {
                     // wait to check is phone number is available in database
                     loadingBar.setTitle("Login Account");
                     loadingBar.setMessage("please wait Until Your Request has been Approved.");
                     loadingBar.setCanceledOnTouchOutside(false);
                     loadingBar.show();
 
-                }else{
+                } else {
                     openProfessorPage();
 
                 }
@@ -91,20 +91,24 @@ public class professorLoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //professor information
-                String dbpassword= String.valueOf(dataSnapshot.child(phone).child("password").getValue());
-                if(dataSnapshot.child(phone).exists()){
-                    if(dbpassword.equals(password)){
+                String dbpassword = String.valueOf(dataSnapshot.child(phone).child("password").getValue());
+                if (dataSnapshot.child(phone).exists()) {
+                    if (dbpassword.equals(password)) {
                         loadingBar.dismiss();
-                        Intent i=new Intent(professorLoginActivity.this,ProfessorActivity.class);
-                        i.putExtra("phone",phone);
+                        Intent i = new Intent(professorLoginActivity.this, ProfessorActivity.class);
+                        i.putExtra("phone", phone);
                         startActivity(i);
-                    }else{
+                        finish();
+                        phoneEditText.setText("");
+                        passwordEditText.setText("");
+                    } else {
                         Toast.makeText(professorLoginActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
                     }
-                }else{
+                } else {
                     Toast.makeText(professorLoginActivity.this, "Not Found this Professor ,Please..Sign Up First !", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
@@ -113,7 +117,7 @@ public class professorLoginActivity extends AppCompatActivity {
     }
 
     public void GotoProfessorSignUpPage(View view) {
-        Intent i=new Intent(this,ProfessorSignUpActivity.class);
+        Intent i = new Intent(this, ProfessorSignUpActivity.class);
         startActivity(i);
     }
 }

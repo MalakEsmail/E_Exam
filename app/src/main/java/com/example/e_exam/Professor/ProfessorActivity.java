@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.e_exam.MainActivity;
 import com.example.e_exam.R;
 import com.example.e_exam.ViewHolders.SubjectsViewHolder;
 import com.example.e_exam.model.Subjects;
@@ -25,15 +26,16 @@ public class ProfessorActivity extends AppCompatActivity {
     FirebaseRecyclerAdapter<Subjects, SubjectsViewHolder> adapter;
     DatabaseReference ref;
     String phone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor);
-         phone=getIntent().getExtras().getString("phone");
+        phone = getIntent().getExtras().getString("phone");
 
-        recyclerView =findViewById(R.id.recycler_view_liner);
+        recyclerView = findViewById(R.id.recycler_view_liner);
         recyclerView.setHasFixedSize(true);
-        layoutManager=new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         showFromDatabase();
 
@@ -44,16 +46,20 @@ public class ProfessorActivity extends AppCompatActivity {
         FirebaseRecyclerOptions<Subjects> options = new FirebaseRecyclerOptions.Builder<Subjects>()
                 .setQuery(ref, Subjects.class)
                 .build();
-        adapter=new FirebaseRecyclerAdapter<Subjects, SubjectsViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Subjects, SubjectsViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull SubjectsViewHolder holder, int i, @NonNull final Subjects subjects) {
                 holder.subjectTextView.setText(subjects.getSubjectName());
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(ProfessorActivity.this,subjectActivity.class);
-                        intent.putExtra("sub",subjects.getSubjectName());
+                        Intent intent = new Intent(ProfessorActivity.this, subjectActivity.class);
+                        intent.putExtra("sub", subjects.getSubjectName());
+                        intent.putExtra("phone", phone);
+
                         startActivity(intent);
+                        finish();
+
                     }
                 });
             }
@@ -74,5 +80,13 @@ public class ProfessorActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         adapter.startListening();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        Intent i = new Intent(ProfessorActivity.this, MainActivity.class);
+        startActivity(i);
     }
 }

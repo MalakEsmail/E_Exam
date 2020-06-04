@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -18,8 +19,11 @@ import com.example.e_exam.ViewHolders.SubjectsViewHolder;
 import com.example.e_exam.model.Subjects;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class studentSubjectsActivity extends AppCompatActivity {
     RecyclerView studentSubjectsRecyclerView;
@@ -70,10 +74,29 @@ public class studentSubjectsActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int i) {
                                         if (i == 0) {
-                                            Intent intent = new Intent(studentSubjectsActivity.this, ExamPaperActivity.class);
-                                            String subject = subjects.getSubjectName().toString();
-                                            intent.putExtra("subject", subject);
-                                            startActivity(intent);
+                                            DatabaseReference degreeRef = FirebaseDatabase.getInstance().getReference().child("Degrees").child(userId).child(subjects.getSubjectName().toString());
+                                            degreeRef.addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                    if (dataSnapshot.exists()) {
+                                                        Toast.makeText(studentSubjectsActivity.this, "This subject Exam done previously.. select another subject !", Toast.LENGTH_LONG).show();
+                                                        finish();
+                                                    } else {
+                                                        Intent intent = new Intent(studentSubjectsActivity.this, ExamPaperActivity.class);
+                                                        String subject = subjects.getSubjectName().toString();
+                                                        intent.putExtra("id", userId);
+                                                        intent.putExtra("subject", subject);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                }
+                                            });
+
                                         }
                                         if (i == 1) {
                                             finish();

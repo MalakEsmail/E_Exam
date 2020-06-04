@@ -28,18 +28,17 @@ public class DepartmentFragment extends Fragment {
     DatabaseReference departmentRef;
 
 
-
     public DepartmentFragment() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        View v=  inflater.inflate(R.layout.department_recycler_view_list,viewGroup,false);
+        View v = inflater.inflate(R.layout.department_recycler_view_list, viewGroup, false);
 
-        recyclerView=v.findViewById(R.id.departmentRecyclerViewId);
+        recyclerView = v.findViewById(R.id.departmentRecyclerViewId);
         recyclerView.setHasFixedSize(true);
-        layoutManager=new LinearLayoutManager(getContext());
+        layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         Toast.makeText(getContext(), "Departments part", Toast.LENGTH_SHORT).show();
         addDatabaseToRecyclerView();
@@ -52,11 +51,12 @@ public class DepartmentFragment extends Fragment {
         FirebaseRecyclerOptions<Departments> options = new FirebaseRecyclerOptions.Builder<Departments>()
                 .setQuery(departmentRef, Departments.class)
                 .build();
-                adapter =
+        adapter =
                 new FirebaseRecyclerAdapter<Departments, DepartmentsViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull DepartmentsViewHolder holder, int i, @NonNull Departments model) {
+                    protected void onBindViewHolder(@NonNull final DepartmentsViewHolder holder, int i, @NonNull final Departments model) {
                         holder.departmentName.setText(model.getDepartmentName());
+
                     }
 
                     @NonNull
@@ -67,7 +67,7 @@ public class DepartmentFragment extends Fragment {
                         return holder;
                     }
                 };
-                    recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
 
     }
 

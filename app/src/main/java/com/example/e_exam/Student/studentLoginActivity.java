@@ -65,13 +65,15 @@ public class studentLoginActivity extends AppCompatActivity {
                                 if (password.equals(passInDb)) {
                                     Intent intent = new Intent(studentLoginActivity.this, studentSubjectsActivity.class);
                                     uId = users.getUserId();
-                                    String departmentName=users.getDepartmentName();
-                                    String levelName=users.getLevelName();
+                                    String departmentName = users.getDepartmentName();
+                                    String levelName = users.getLevelName();
                                     intent.putExtra("uId", uId);
                                     intent.putExtra("departmentName", departmentName);
                                     intent.putExtra("levelName", levelName);
 
                                     startActivity(intent);
+                                    passwordEt.setText("");
+                                    emailEt.setText("");
                                 } else {
                                     Toast.makeText(studentLoginActivity.this, "Password in not matching..Try Again !", Toast.LENGTH_SHORT).show();
                                 }

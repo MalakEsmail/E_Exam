@@ -12,12 +12,12 @@
         android:id="@+id/adminEmailEditTextId"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_margin="30dp"
         android:background="@drawable/edit_text"
         android:gravity="center"
-        android:inputType="textEmailAddress"
-        android:layout_margin="30dp"
-
         android:hint="@string/enter_your_email"
+
+        android:inputType="textEmailAddress"
 
         />
 
@@ -38,6 +38,7 @@
         android:layout_margin="30dp"
         android:background="@drawable/special_button"
         android:text="@string/login"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF" />
 </LinearLayout>
 

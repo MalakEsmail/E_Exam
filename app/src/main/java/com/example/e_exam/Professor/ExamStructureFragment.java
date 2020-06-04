@@ -14,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.e_exam.R;
 import com.example.e_exam.model.Question;
@@ -38,16 +40,16 @@ public class ExamStructureFragment extends Fragment {
 
     private ArrayAdapter<String> chapterAdapter, adapter, questionAdapter;
 
-    private String subject, time, questionNum, chapter, type, category;
+    private String subject, time, questionNum, chapter, type, category, phone;
 
     ValueEventListener listener;
     Question question;
     ArrayList<Question> questionsArr;
     int i = 0;
 
-
-    public ExamStructureFragment(String subject) {
+    public ExamStructureFragment(String subject, String phone) {
         this.subject = subject;
+        this.phone = phone;
     }
 
     @Nullable
@@ -115,6 +117,7 @@ public class ExamStructureFragment extends Fragment {
                     @Override
                     public void onSuccess(Object o) {
                         Toast.makeText(getContext(), "Exam Structure Added Successfully..", Toast.LENGTH_SHORT).show();
+                        replaceFragment(getFragmentManager(), new HomeFragment(subject, phone), R.id.frame_Subject_container);
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -202,5 +205,12 @@ public class ExamStructureFragment extends Fragment {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                     }
                 });
+    }
+
+    public static void replaceFragment(FragmentManager getChildFragmentManager, Fragment fragment, int id) {
+        FragmentTransaction transaction = getChildFragmentManager.beginTransaction();
+        transaction.replace(id, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

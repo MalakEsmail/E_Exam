@@ -5,12 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".Student.ExamDegree">
+
     <TextView
         android:id="@+id/degreeTextViewId"
-        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="30dp"
+        android:background="@drawable/special_button"
+        android:gravity="center"
+        android:hint="Student Degree"
         android:text="Exam Degree"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/finish"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/special_button"
+        android:text="Finish"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>

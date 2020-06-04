@@ -1,5 +1,6 @@
 package com.example.e_exam.Admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -12,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.e_exam.MainActivity;
 import com.example.e_exam.R;
 import com.google.android.material.navigation.NavigationView;
 
@@ -54,11 +56,21 @@ public class AdminActivity extends AppCompatActivity implements NavigationView.O
 
             case R.id.LogoutId:
                 finish();
+                Intent i = new Intent(AdminActivity.this, MainActivity.class);
+                startActivity(i);
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent i = new Intent(AdminActivity.this, AdminActivity.class);
+        startActivity(i);
+
+    }
 
 }

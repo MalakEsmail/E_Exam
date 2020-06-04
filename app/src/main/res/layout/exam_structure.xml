@@ -42,7 +42,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="20dp"
-
         android:background="@drawable/edit_text"
         android:gravity="center"
         android:hint="Question needed number"
